@@ -136,7 +136,7 @@ salinity <- c(rep(35.24663, 5),
               )
 
 metadata <- tibble(sample_id = phenodata$sample_name,
-                   class = phenodata$class,
+                   class = as_factor(phenodata$class),
                    taxon, 
                    time_fac, 
                    rep,
