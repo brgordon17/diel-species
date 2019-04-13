@@ -54,6 +54,9 @@ preds <- confusionMatrix(predict(mzrf_taxon, newdata = test_data),
                          test_data$taxon)
 
 # Model of diurnal variation ---------------------------------------------------
+library(tidyverse)
+library(caret)
+
 # Load and prep data
 load("./data/mzdata.rda")
 
@@ -81,10 +84,13 @@ seeds <- vector(mode = "list", length = 31)
 for(i in 1:30) seeds[[i]] <- sample.int(1000, length(tunegrid[,1]))
 seeds[[31]] <- sample.int(1000, 1)
 
+# check for best k. Ideally, 4/20 samples (1 of each class) to be held out.
+#createFolds(y = mzdata_aspe$time_fac, k = 5)
+
 # train control
 ctrl <- caret::trainControl(method = "repeatedcv",
-                            number = 10,
-                            repeats = 3,
+                            number = 5,
+                            repeats = 6,
                             summaryFunction = defaultSummary,
                             seeds = seeds,
                             savePredictions = "all",
