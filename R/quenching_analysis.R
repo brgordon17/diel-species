@@ -78,7 +78,7 @@ load("./data/snapdata.rda")
 snapdata <- filter(snapdata, class == "methanol" | class == "nitrogen")
 snapdata <- data.frame(droplevels(snapdata))
 
-# Model of taxonomy ------------------------------------------------------------
+# Model of two classes ---------------------------------------------------------
 tunegrid <- expand.grid(.mtry = seq(from = 25, to = 100, by = 25))
 
 # set seeds
