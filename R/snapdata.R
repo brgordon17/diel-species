@@ -62,7 +62,7 @@ saveRDS(snapdata.imp, "./dev/snapdata_imp.rds")
 # Check data structure ---------------------------------------------------------
 # RLA plot
 ggplot(data = reshape2::melt(filter(snapdata, 
-                                    class == "methanol" | class == "snap")),
+                                    class == "methanol" | class == "nitrogen")),
        aes(x = sample_id, 
            y = log(value, 2) - median(log(value, 2)),
            fill = class)) +
@@ -91,7 +91,7 @@ scores <- data.frame(phenodata, pca$x)
 x_lab <- paste("PC1", " (", round(exp_var[1] * 100, 2), "%)", sep =  "")
 y_lab <- paste("PC2", " (", round(exp_var[2] * 100, 2), "%)", sep =  "")
 
-ggplot(data = filter(scores, class == "methanol" | class == "snap"),
+ggplot(data = filter(scores, class == "methanol" | class == "nitrogen"),
        aes(x = PC1,
            y = PC2,
            color = class,
