@@ -10,7 +10,6 @@ library(reshape2)
 # Load and prep data --------------------------------------------------------------------
 snapdata <- read_csv("./data-raw/snapdata-raw.csv", na = "0")
 phenodata <- read_csv("./data-raw/snap-phenodata-raw.csv", na = "0")
-colnames(phenodata)[1] <- "sample_id"
 
 # remove isotopes --------------------------------------------------------------
 snapdata <- snapdata[-grep("[M+1]", snapdata$isotopes, fixed = TRUE),]
