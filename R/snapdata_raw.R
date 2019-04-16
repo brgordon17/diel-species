@@ -23,8 +23,8 @@ phenod <- data.frame(sample_name = sub(basename(mzfiles), pattern = ".mzXML",
                      class = c(rep("methanol", 10),
                                rep("PBQC_all", 3),
                                rep("PBQC_me", 2),
-                               rep("PBQC_sn", 2),
-                               rep("snap", 10)),
+                               rep("PBQC_ni", 2),
+                               rep("nitrogen", 10)),
                      stringsAsFactors = FALSE)
 
 # load raw data and save
