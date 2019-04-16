@@ -18,7 +18,7 @@ mzfiles <- list.files(path = "~/Big Data/LCMS Data/MeOH vs Snap Exp/mzxml_data/"
                       recursive = TRUE)
 
 # create metadata or phenodata
-phenod <- data.frame(sample_name = sub(basename(mzfiles), pattern = ".mzXML",
+phenod <- data.frame(sample_id = sub(basename(mzfiles), pattern = ".mzXML",
                                        replacement = "", fixed = TRUE),
                      class = c(rep("methanol", 10),
                                rep("PBQC_all", 3),
