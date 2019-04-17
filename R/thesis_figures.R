@@ -99,7 +99,58 @@ gridExtra::grid.arrange(gridExtra::arrangeGrob(plot_a,
                                                plot_b,
                                                nrow = 1))
 grDevices::dev.off()
-  
+
+# plot of important feature intensities ----------------------------------------
+library(tidyverse)
+
+# Load data
+load("./data/snapdata.rda")
+mzrf <- read_rds("./dev/quenching_model.rds")
+
+# identify the 9 most important variables
+mzrf_impvars <- varImp(mzrf, scale = FALSE)
+mzrf_impvars <- mzrf_impvars$importance
+mzrf_impvars <- cbind(importance = apply(mzrf_impvars, 1, max), mzrf_impvars)
+mzrf_impvars <- mzrf_impvars[order(-mzrf_impvars$importance), ,drop = FALSE]
+mzrf_impvars <- as_tibble(mzrf_impvars[1:9, ], rownames = "mz")
+
+# get abundances
+sum_snapdata <- 
+  snapdata %>% 
+  filter(class == "methanol" | class == "nitrogen") %>%
+  select(1:2, c(mzrf_impvars$mz)) %>%
+  reshape2::melt(.) %>%
+  as_tibble()
+sum_snapdata$variable <- str_replace_all(sum_snapdata$variable, "mz_", "")
+
+# plot
+ggplot(sum_snapdata, aes(x = class,
+                         y = value/10^4,
+                         colour = class,
+                         fill = class)) +
+  geom_boxplot(alpha = 0.1) +
+  facet_wrap(vars(variable)) +
+  scale_x_discrete(name = NULL) +
+  scale_y_continuous(name = expression(Intensity%*%10^4)) +
+  scale_colour_manual(values = gordon01::qual_colours[c(6, 2)]) +
+  theme(axis.text.y = element_text(size = 10, colour = "grey65"),
+        axis.text.x = element_blank(),
+        axis.title = element_text(size = 12),
+        axis.ticks = element_blank(),
+        legend.key = element_blank(),
+        legend.text = element_text(size = 12),
+        strip.text = element_text(size = 12),
+        strip.background = element_blank(),
+        legend.position = "bottom",
+        legend.title = element_blank()
+  )
+
+# save plot
+ggsave("./figs/quenching_intensities.pdf",
+       width = 10,
+       height = 6.5,
+       units = "in")
+
 # VIP plot of diurnal differences ----------------------------------------------
 library(tidyverse)
 library(reshape2)
@@ -298,7 +349,6 @@ dami_plot <- ggplot(dami_impvars,
 dami_plot
 
 # Construct composite plot
-
 # Extract Legend 
 g_tab <- ggplot_gtable(ggplot_build(aspe_plot))
 leg <- which(sapply(g_tab$grobs, function(x) x$name) == "guide-box")
