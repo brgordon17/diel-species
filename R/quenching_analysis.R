@@ -72,6 +72,7 @@ ggplot(data = reshape2::melt(filter(snapdata,
 
 # RF model ---------------------------------------------------------------------
 library(caret)
+library(tidyverse)
 
 # Load and prep data 
 load("./data/snapdata.rda")
@@ -113,6 +114,8 @@ mzrf <- caret::train(x = snapdata[-1:-2],
 
 confusionMatrix(mzrf$pred$pred[mzrf$pred$mtry == mzrf$bestTune$mtry],
                 mzrf$pred$obs[mzrf$pred$mtry == mzrf$bestTune$mtry])
+
+saveRDS(mzrf, "./dev/quenching_model.rds")
 
 # Pull out important variables
 mzrf_impvars <- varImp(mzrf, scale = FALSE)
