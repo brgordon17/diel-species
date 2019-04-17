@@ -128,7 +128,8 @@ ggplot(sum_snapdata, aes(x = class,
                          y = value/10^4,
                          colour = class,
                          fill = class)) +
-  geom_boxplot(alpha = 0.1) +
+  geom_boxplot(alpha = 0.5) +
+  geom_hline(yintercept = 0.1, linetype = 3) +
   facet_wrap(vars(variable)) +
   scale_x_discrete(name = NULL) +
   scale_y_continuous(name = expression(Intensity%*%10^4)) +
