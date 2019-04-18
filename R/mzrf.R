@@ -20,6 +20,9 @@ train_data <- mzdata[train_index, ]
 test_data  <- mzdata[-train_index, ]
 
 # Model of taxonomy ------------------------------------------------------------
+# check for best k. Ideally, 4/20 samples (1 of each class) to be held out.
+# createFolds(y = train_data$taxon, k = 10)
+
 tunegrid <- expand.grid(.mtry = seq(from = 25, to = 200, by = 25))
 
 # set seeds
@@ -52,6 +55,13 @@ mzrf_taxon <- caret::train(x = train_data[-1:-9],
 
 preds <- confusionMatrix(predict(mzrf_taxon, newdata = test_data),
                          test_data$taxon)
+
+confusionMatrix(mzrf_taxon$pred$pred[mzrf_taxon$pred$mtry == 
+                                      mzrf_taxon$bestTune$mtry],
+                mzrf_taxon$pred$obs[mzrf_taxon$pred$mtry ==
+                                     mzrf_taxon$bestTune$mtry])
+
+saveRDS(mzrf_taxon, "./dev/mzrf_taxon.rds")
 
 # Model of diurnal variation ---------------------------------------------------
 library(tidyverse)
