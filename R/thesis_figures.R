@@ -182,9 +182,9 @@ pcaplot <- ggplot(data = filter(scores, taxon != "PBQC"),
              )) +
   labs(x = x_lab, y = y_lab) +
   scale_shape_manual(values = c(21:25)) +
-  scale_color_manual(values = grDevices::adjustcolor(gordon01::qual_colours,
+  scale_color_manual(values = grDevices::adjustcolor(gordon01::qual_colours[c(1:3, 6, 7)],
                                                      alpha.f = 0.9)) +
-  scale_fill_manual(values = grDevices::adjustcolor(gordon01::qual_colours,
+  scale_fill_manual(values = grDevices::adjustcolor(gordon01::qual_colours[c(1:3, 6, 7)],
                                                     alpha.f = 0.5)) +
   theme(panel.background = element_blank(),
         axis.ticks = element_blank(),
@@ -205,12 +205,12 @@ rladata$taxon <- factor(rladata$taxon,
 
 rlaplot <- ggplot(data = rladata,
                   aes(x = sample_id, 
-                  y = log(value, 2) - median(log(value, 2)),
-                  fill = taxon)) +
-  geom_boxplot(alpha = 0.5,
+                      y = log(value, 2) - median(log(value, 2)),
+                      fill = taxon)) +
+  geom_boxplot(alpha = 0.7,
                outlier.alpha = 0.4,
                outlier.size = 1) +
-  scale_fill_manual(values = gordon01::qual_colours[c(2, 1, 4, 5, 3)]) +
+  scale_fill_manual(values = gordon01::qual_colours[c(2, 1, 6, 7, 3)]) +
   scale_x_discrete(name = "Sample") +
   scale_y_continuous(name = "Relative log Abundance") +
   theme(panel.background = element_blank(),
@@ -290,11 +290,11 @@ ggplot(taxon_impvars,
   scale_x_continuous(name = "Mean Decrease in Accuracy") +
   scale_y_discrete(name = "Important Spectral Features (Da)") +
   scale_color_manual(name = "Species", 
-                     values = gordon01::qual_colours[]) +
+                     values = gordon01::qual_colours[c(1:3, 6, 7)]) +
   scale_shape_manual(name = "Species", 
                      values = c(21:25)) +
   scale_fill_manual(name = "Species",
-                    values = grDevices::adjustcolor(gordon01::qual_colours[],
+                    values = grDevices::adjustcolor(gordon01::qual_colours[c(1:3, 6, 7)],
                                                     alpha.f = 0.3)) +
   theme(axis.ticks.y = element_blank(),
         axis.ticks.x = element_blank(),
@@ -312,6 +312,62 @@ ggplot(taxon_impvars,
 
 # save plot
 ggsave("./figs/taxon_vip_plot.pdf",
+       width = 10,
+       height = 6.5,
+       units = "in")
+
+# plot of taxonomic feature intensities ----------------------------------------
+library(tidyverse)
+library(caret)
+
+# Load data
+load("./data/mzdata.rda")
+mzrf <- read_rds("./dev/mzrf_taxon.rds")
+
+# identify the 12 most important variables
+mzrf_impvars <- varImp(mzrf, scale = FALSE)
+mzrf_impvars <- mzrf_impvars$importance
+mzrf_impvars <- cbind(importance = apply(mzrf_impvars, 1, max), mzrf_impvars)
+mzrf_impvars <- mzrf_impvars[order(-mzrf_impvars$importance), ,drop = FALSE]
+mzrf_impvars <- as_tibble(mzrf_impvars[1:12, ], rownames = "mz")
+
+# get abundances
+sum_mzdata <- 
+  mzdata %>% 
+  filter(taxon != "PBQC") %>%
+  select(1, 3, c(mzrf_impvars$mz)) %>%
+  reshape2::melt(.) %>%
+  as_tibble()
+sum_mzdata$variable <- str_replace_all(sum_mzdata$variable, "mz_", "")
+sum_mzdata <- droplevels(sum_mzdata)
+
+# plot
+ggplot(sum_mzdata, 
+       aes(x = taxon,
+           y = value/10^4,
+           colour = taxon,
+           fill = taxon)) +
+  geom_boxplot(alpha = 0.5) +
+  geom_hline(yintercept = 0.1, linetype = 3) +
+  facet_wrap(vars(variable), scales = "free") +
+  scale_x_discrete(name = NULL) +
+  scale_y_continuous(name = expression(Intensity%*%10^4)) +
+  scale_colour_manual(values = gordon01::qual_colours[c(1:3, 6, 7)]) +
+  scale_fill_manual(values = gordon01::qual_colours[c(1:3, 6, 7)]) +
+  theme(axis.text.y = element_text(size = 10, colour = "grey65"),
+        axis.text.x = element_blank(),
+        axis.title = element_text(size = 12),
+        axis.ticks = element_blank(),
+        legend.key = element_blank(),
+        legend.text = element_text(size = 12),
+        strip.text = element_text(size = 12),
+        strip.background = element_blank(),
+        legend.position = "bottom",
+        legend.title = element_blank()
+  )
+
+# save plot
+ggsave("./figs/taxon_intensities.pdf",
        width = 10,
        height = 6.5,
        units = "in")
@@ -601,59 +657,3 @@ gridExtra::grid.arrange(plot_aspe,
                         left = ygrob,
                         bottom = xgrob)
 grDevices::dev.off()
-
-# plot of taxonomic feature intensities ----------------------------------------
-library(tidyverse)
-library(caret)
-
-# Load data
-load("./data/mzdata.rda")
-mzrf <- read_rds("./dev/mzrf_taxon.rds")
-
-# identify the 12 most important variables
-mzrf_impvars <- varImp(mzrf, scale = FALSE)
-mzrf_impvars <- mzrf_impvars$importance
-mzrf_impvars <- cbind(importance = apply(mzrf_impvars, 1, max), mzrf_impvars)
-mzrf_impvars <- mzrf_impvars[order(-mzrf_impvars$importance), ,drop = FALSE]
-mzrf_impvars <- as_tibble(mzrf_impvars[1:12, ], rownames = "mz")
-
-# get abundances
-sum_mzdata <- 
-  mzdata %>% 
-  filter(taxon != "PBQC") %>%
-  select(1, 3, c(mzrf_impvars$mz)) %>%
-  reshape2::melt(.) %>%
-  as_tibble()
-sum_mzdata$variable <- str_replace_all(sum_mzdata$variable, "mz_", "")
-sum_mzdata <- droplevels(sum_mzdata)
-
-# plot
-ggplot(sum_mzdata, 
-       aes(x = taxon,
-           y = value/10^4,
-           colour = taxon,
-           fill = taxon)) +
-  geom_boxplot(alpha = 0.5) +
-  geom_hline(yintercept = 0.1, linetype = 3) +
-  facet_wrap(vars(variable), scales = "free") +
-  scale_x_discrete(name = NULL) +
-  scale_y_continuous(name = expression(Intensity%*%10^4)) +
-  scale_colour_manual(values = gordon01::qual_colours[c(1:3, 5, 6)]) +
-  scale_fill_manual(values = gordon01::qual_colours[c(1:3, 5, 6)]) +
-  theme(axis.text.y = element_text(size = 10, colour = "grey65"),
-        axis.text.x = element_blank(),
-        axis.title = element_text(size = 12),
-        axis.ticks = element_blank(),
-        legend.key = element_blank(),
-        legend.text = element_text(size = 12),
-        strip.text = element_text(size = 12),
-        strip.background = element_blank(),
-        legend.position = "bottom",
-        legend.title = element_blank()
-  )
-
-# save plot
-ggsave("./figs/taxon_intensities.pdf",
-       width = 10,
-       height = 6.5,
-       units = "in")
