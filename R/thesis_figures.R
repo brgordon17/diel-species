@@ -112,7 +112,7 @@ mzrf_impvars <- varImp(mzrf, scale = FALSE)
 mzrf_impvars <- mzrf_impvars$importance
 mzrf_impvars <- cbind(importance = apply(mzrf_impvars, 1, max), mzrf_impvars)
 mzrf_impvars <- mzrf_impvars[order(-mzrf_impvars$importance), ,drop = FALSE]
-mzrf_impvars <- as_tibble(mzrf_impvars[1:9, ], rownames = "mz")
+mzrf_impvars <- as_tibble(mzrf_impvars[1:12, ], rownames = "mz")
 
 # get abundances
 sum_snapdata <- 
@@ -130,7 +130,7 @@ ggplot(sum_snapdata, aes(x = class,
                          fill = class)) +
   geom_boxplot(alpha = 0.5) +
   geom_hline(yintercept = 0.1, linetype = 3) +
-  facet_wrap(vars(variable)) +
+  facet_wrap(vars(variable), scales = "free") +
   scale_x_discrete(name = NULL) +
   scale_y_continuous(name = expression(Intensity%*%10^4)) +
   scale_colour_manual(values = gordon01::qual_colours[c(6, 2)]) +
