@@ -317,12 +317,9 @@ aspe_plot <- ggplot(data = aspe_scores,
   scale_fill_manual(name = "Time (hh:mm)",
                     values = grDevices::adjustcolor(gordon01::qual_colours[c(1:3, 6, 7)],
                                                     alpha.f = 0.5)) +
-  theme(panel.background = element_blank(),
-        axis.ticks = element_blank(),
-        panel.grid.major = element_line(colour = "grey90"),
+  theme(axis.ticks = element_blank(),panel.grid.major = element_line(colour = "grey90"),
         axis.text = element_text(size = 10, colour = "grey65"),
         axis.title = element_blank(),
-        legend.key = element_rect(fill = "transparent", colour = NA),
         legend.text = element_text(size = 11),
         legend.title = element_text(size = 12),
         legend.position = "right")
@@ -339,12 +336,9 @@ aequ_plot <- ggplot(data = aequ_scores,
                                                      alpha.f = 0.9)) +
   scale_fill_manual(values = grDevices::adjustcolor(gordon01::qual_colours[c(1:3, 6, 7)],
                                                     alpha.f = 0.5)) +
-  theme(panel.background = element_blank(),
-        axis.ticks = element_blank(),
-        panel.grid.major = element_line(colour = "grey90"),
+  theme(axis.ticks = element_blank(),
         axis.text = element_text(size = 10, colour = "grey65"),
         axis.title = element_blank(),
-        legend.key = element_rect(fill = "transparent", colour = NA),
         legend.text = element_text(size = 11),
         legend.title = element_blank(),
         legend.position = "none")
@@ -361,12 +355,9 @@ digi_plot <- ggplot(data = digi_scores,
                                                      alpha.f = 0.9)) +
   scale_fill_manual(values = grDevices::adjustcolor(gordon01::qual_colours[c(1:3, 6, 7)],
                                                     alpha.f = 0.5)) +
-  theme(panel.background = element_blank(),
-        axis.ticks = element_blank(),
-        panel.grid.major = element_line(colour = "grey90"),
+  theme(axis.ticks = element_blank(),
         axis.text = element_text(size = 10, colour = "grey65"),
         axis.title = element_blank(),
-        legend.key = element_rect(fill = "transparent", colour = NA),
         legend.text = element_text(size = 11),
         legend.title = element_blank(),
         legend.position = "none")
@@ -383,12 +374,9 @@ cyli_plot <- ggplot(data = cyli_scores,
                                                      alpha.f = 0.9)) +
   scale_fill_manual(values = grDevices::adjustcolor(gordon01::qual_colours[c(1:3, 6, 7)],
                                                     alpha.f = 0.5)) +
-  theme(panel.background = element_blank(),
-        axis.ticks = element_blank(),
-        panel.grid.major = element_line(colour = "grey90"),
+  theme(axis.ticks = element_blank(),
         axis.text = element_text(size = 10, colour = "grey65"),
         axis.title = element_blank(),
-        legend.key = element_rect(fill = "transparent", colour = NA),
         legend.text = element_text(size = 11),
         legend.title = element_blank(),
         legend.position = "none")
@@ -405,12 +393,9 @@ dami_plot <- ggplot(data = dami_scores,
                                                      alpha.f = 0.9)) +
   scale_fill_manual(values = grDevices::adjustcolor(gordon01::qual_colours[c(1:3, 6, 7)],
                                                     alpha.f = 0.5)) +
-  theme(panel.background = element_blank(),
-        axis.ticks = element_blank(),
-        panel.grid.major = element_line(colour = "grey90"),
+  theme(axis.ticks = element_blank(),
         axis.text = element_text(size = 10, colour = "grey65"),
         axis.title = element_blank(),
-        legend.key = element_rect(fill = "transparent", colour = NA),
         legend.text = element_text(size = 11),
         legend.title = element_blank(),
         legend.position = "none")
