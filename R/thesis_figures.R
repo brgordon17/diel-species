@@ -837,6 +837,7 @@ ggsave("./figs/taxon_intensities.pdf",
 # VIP plot of diurnal differences ----------------------------------------------
 library(tidyverse)
 library(reshape2)
+library(caret)
 
 # Load models
 mzrf_aspe <- read_rds("./dev/mzrf_aspe.rds")
@@ -921,7 +922,8 @@ aspe_plot <- ggplot(aspe_impvars,
                     aes(x = importance, 
                         y = mz,
                         shape = max_class,
-                        colour = max_class)) +
+                        colour = max_class,
+                        fill = max_class)) +
   geom_point(size = 3, stroke = 1) +
   scale_x_continuous(name = NULL) +
   scale_y_discrete(name = NULL) +
@@ -929,15 +931,13 @@ aspe_plot <- ggplot(aspe_impvars,
                      values = gordon01::qual_colours[c(1:3, 6)]) +
   scale_shape_manual(name = "Time (hh:mm)", 
                      values = c(21:24)) +
+  scale_fill_manual(name = "Time (hh:mm)",
+                    values = gordon01::qual_colours[c(1:3, 6)])
   theme(axis.ticks.y = element_blank(),
         axis.ticks.x = element_blank(),
         axis.text.x = element_text(size = 10),
         axis.text.y = element_text(size = 10),
-        panel.background = element_blank(),
-        panel.grid.major.x = element_blank(),
         panel.grid.minor.x = element_blank(),
-        panel.grid.major.y = element_line(colour = "grey90",
-                                          size = 0.4),
         legend.title = element_text(size = 12),
         legend.text = element_text(size = 12),
         legend.key = element_blank())
