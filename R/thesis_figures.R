@@ -927,17 +927,20 @@ aspe_plot <- ggplot(aspe_impvars,
   geom_point(size = 3, stroke = 1) +
   scale_x_continuous(name = NULL) +
   scale_y_discrete(name = NULL) +
-  scale_color_manual(name = "Time (hh:mm)", 
-                     values = gordon01::qual_colours[c(1:3, 6)]) +
+  scale_color_manual(name = "Time (hh:mm)",
+                     values = grDevices::adjustcolor(gordon01::qual_colours[c(1:3, 6, 7)],
+                                                     alpha.f = 0.9)) +
+  scale_fill_manual(name = "Time (hh:mm)",
+                    values = grDevices::adjustcolor(gordon01::qual_colours[c(1:3, 6, 7)],
+                                                    alpha.f = 0.5)) +
   scale_shape_manual(name = "Time (hh:mm)", 
                      values = c(21:24)) +
-  scale_fill_manual(name = "Time (hh:mm)",
-                    values = gordon01::qual_colours[c(1:3, 6)])
   theme(axis.ticks.y = element_blank(),
         axis.ticks.x = element_blank(),
         axis.text.x = element_text(size = 10),
         axis.text.y = element_text(size = 10),
         panel.grid.minor.x = element_blank(),
+        panel.grid.major.x = element_blank(),
         legend.title = element_text(size = 12),
         legend.text = element_text(size = 12),
         legend.key = element_blank())
@@ -947,21 +950,25 @@ aequ_plot <- ggplot(aequ_impvars,
                     aes(x = importance, 
                         y = mz,
                         shape = max_class,
-                        colour = max_class)) +
+                        colour = max_class,
+                        fill = max_class)) +
   geom_point(size = 3, stroke = 1) +
   scale_x_continuous(name = NULL) +
   scale_y_discrete(name = NULL) +
-  scale_color_manual(values = gordon01::qual_colours[c(1:3, 6)]) +
-  scale_shape_manual(values = c(21:24)) +
+  scale_color_manual(name = "Time (hh:mm)",
+                     values = grDevices::adjustcolor(gordon01::qual_colours[c(1:3, 6, 7)],
+                                                     alpha.f = 0.9)) +
+  scale_fill_manual(name = "Time (hh:mm)",
+                    values = grDevices::adjustcolor(gordon01::qual_colours[c(1:3, 6, 7)],
+                                                    alpha.f = 0.5)) +
+  scale_shape_manual(name = "Time (hh:mm)", 
+                     values = c(21:24)) +
   theme(axis.ticks.y = element_blank(),
         axis.ticks.x = element_blank(),
         axis.text.x = element_text(size = 10),
         axis.text.y = element_text(size = 10),
-        panel.background = element_blank(),
-        panel.grid.major.x = element_blank(),
         panel.grid.minor.x = element_blank(),
-        panel.grid.major.y = element_line(colour = "grey90",
-                                          size = 0.4),
+        panel.grid.major.x = element_blank(),
         legend.position = "none")
 aequ_plot
 
@@ -969,21 +976,25 @@ digi_plot <- ggplot(digi_impvars,
                     aes(x = importance, 
                         y = mz,
                         shape = max_class,
-                        colour = max_class)) +
+                        colour = max_class,
+                        fill = max_class)) +
   geom_point(size = 3, stroke = 1) +
   scale_x_continuous(name = NULL) +
   scale_y_discrete(name = NULL) +
-  scale_color_manual(values = gordon01::qual_colours[c(1:3, 6)]) +
-  scale_shape_manual(values = c(21:24)) +
+  scale_color_manual(name = "Time (hh:mm)",
+                     values = grDevices::adjustcolor(gordon01::qual_colours[c(1:3, 6, 7)],
+                                                     alpha.f = 0.9)) +
+  scale_fill_manual(name = "Time (hh:mm)",
+                    values = grDevices::adjustcolor(gordon01::qual_colours[c(1:3, 6, 7)],
+                                                    alpha.f = 0.5)) +
+  scale_shape_manual(name = "Time (hh:mm)", 
+                     values = c(21:24)) +
   theme(axis.ticks.y = element_blank(),
         axis.ticks.x = element_blank(),
         axis.text.x = element_text(size = 10),
         axis.text.y = element_text(size = 10),
-        panel.background = element_blank(),
-        panel.grid.major.x = element_blank(),
         panel.grid.minor.x = element_blank(),
-        panel.grid.major.y = element_line(colour = "grey90",
-                                          size = 0.4),
+        panel.grid.major.x = element_blank(),
         legend.position = "none")
 digi_plot
 
@@ -991,21 +1002,25 @@ cyli_plot <- ggplot(cyli_impvars,
                     aes(x = importance, 
                         y = mz,
                         shape = max_class,
-                        colour = max_class)) +
+                        colour = max_class,
+                        fill = max_class)) +
   geom_point(size = 3, stroke = 1) +
   scale_x_continuous(name = NULL) +
   scale_y_discrete(name = NULL) +
-  scale_color_manual(values = gordon01::qual_colours[c(1:3, 6)]) +
-  scale_shape_manual(values = c(21:24)) +
+  scale_color_manual(name = "Time (hh:mm)",
+                     values = grDevices::adjustcolor(gordon01::qual_colours[c(1:3, 6, 7)],
+                                                     alpha.f = 0.9)) +
+  scale_fill_manual(name = "Time (hh:mm)",
+                    values = grDevices::adjustcolor(gordon01::qual_colours[c(1:3, 6, 7)],
+                                                    alpha.f = 0.5)) +
+  scale_shape_manual(name = "Time (hh:mm)", 
+                     values = c(21:24)) +
   theme(axis.ticks.y = element_blank(),
         axis.ticks.x = element_blank(),
         axis.text.x = element_text(size = 10),
         axis.text.y = element_text(size = 10),
-        panel.background = element_blank(),
-        panel.grid.major.x = element_blank(),
         panel.grid.minor.x = element_blank(),
-        panel.grid.major.y = element_line(colour = "grey90",
-                                          size = 0.4),
+        panel.grid.major.x = element_blank(),
         legend.position = "none")
 cyli_plot
 
@@ -1013,21 +1028,25 @@ dami_plot <- ggplot(dami_impvars,
                     aes(x = importance, 
                         y = mz,
                         shape = max_class,
-                        colour = max_class)) +
+                        colour = max_class,
+                        fill = max_class)) +
   geom_point(size = 3, stroke = 1) +
   scale_x_continuous(name = NULL) +
   scale_y_discrete(name = NULL) +
-  scale_color_manual(values = gordon01::qual_colours[c(1, 3, 6)]) +
-  scale_shape_manual(values = c(21, 23, 24)) +
+  scale_color_manual(name = "Time (hh:mm)",
+                     values = grDevices::adjustcolor(gordon01::qual_colours[c(1:3, 6, 7)],
+                                                     alpha.f = 0.9)) +
+  scale_fill_manual(name = "Time (hh:mm)",
+                    values = grDevices::adjustcolor(gordon01::qual_colours[c(1:3, 6, 7)],
+                                                    alpha.f = 0.5)) +
+  scale_shape_manual(name = "Time (hh:mm)", 
+                     values = c(21:24)) +
   theme(axis.ticks.y = element_blank(),
         axis.ticks.x = element_blank(),
         axis.text.x = element_text(size = 10),
         axis.text.y = element_text(size = 10),
-        panel.background = element_blank(),
-        panel.grid.major.x = element_blank(),
         panel.grid.minor.x = element_blank(),
-        panel.grid.major.y = element_line(colour = "grey90",
-                                          size = 0.4),
+        panel.grid.major.x = element_blank(),
         legend.position = "none")
 dami_plot
 
