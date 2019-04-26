@@ -1,0 +1,12 @@
+sample,mz,adduct,reported_mz,reported_ion,monoiso_mass,molec_formula,reported_name,taxon,endnote_ref
+A_aspe,784.53491,none,NA,NA,783.560059,C44H82NO6PS,Arachidonoylthio-PC,Pocillopora,{Sogin; 2016 #6262}
+A_aspe,277.18008,none,299,[M+Na]+,276.1725,C17H24O3,Methyl montiporate B,Montipora,{Alam; 2001 #6321}
+A_aspe,117.06958,[M+2H-CH4]2+ 248.147 [M+2H-C4H8]2+,311.1596,[M+Na]+,288.17254,C18H24O3,Montiporic acid D,Montipora,{Kodani; 2013 #6325}
+A_aspe,298.27383,[M+H]+ 297.268 [M+H-CH3],311,[M+H]+,312.302826,C20H40O2,Arachidic Acid,Aiptasia/Symbiodinium,{Dunn; 2012 #6194}
+A_aspe,1019.77533,[2M+H]+,NA,NA,509.384521,C26H56NO6P,Lyso-PAF C-18,Pocillopora,{Sogin; 2016 #6262}
+A_aspe,1019.77533,[2M+H]+,510.42,[M+H]+,509.384521,C26H56NO6P,Lyso-PAF C-18,Scleractinia,{Quinn; 2016 #6269}
+M_aequ,347.25863,none,NA,NA,346.2508,C22H34O3,10-hydroxydocosapentaenoic acid,Madrepora,{Mancini; 1999 #6327}
+P_cyli,815.55253,none,813,NA,814.576,C53H74N4O3,Pyrophaeophytinæa,Symbiodinium,{Venn; 2006 #6285}
+P_cyli,815.55253,[M+Na]+ 792.574 [M+H]+,813,NA,814.576,C53H74N4O3,Pyrophaeophytinæa,Symbiodinium,{Venn; 2006 #6285}
+P_cyli,116.07072,[M+H]+ 115.066 [M+H-C2H4]+,NA,NA,143.094635,C7H13NO2,Proline betaine,Scleractinia,{Hill; 2010 #6294}
+M_digi,135.04778,none,135,[M+H]+,134.040146,C5H10O2S,Dimethylsulfoniopropionate,Acropora,{Swan; 2017 #6295}
