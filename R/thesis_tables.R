@@ -3,6 +3,7 @@
 # Date: 2019-04-12
 
 # diurnal model results --------------------------------------------------------
+# Table built in excel from results below
 library(tidyverse)
 library(caret)
 
@@ -39,4 +40,18 @@ conmat_dami <- confusionMatrix(mzrf_dami$pred$pred[mzrf_dami$pred$mtry ==
                                mzrf_dami$pred$obs[mzrf_dami$pred$mtry ==
                                                     mzrf_dami$bestTune$mtry])
 
-# Table built in excel from the above results
+# annotated diurnal features table ---------------------------------------------
+library(tidyverse)
+
+# Load and prep data
+matches <- read_rds("./dev/impvar_matches.rds")
+
+# remove generic referencing and replace commas
+matches <-
+  matches %>%
+  mutate(endnote_ref = stringr::str_replace(endnote_ref, ",", ";")) %>%
+  select(-ref)
+
+
+# Save csv 
+readr::write_csv(matches, "./tables/annotated_diurnal_features.txt")
