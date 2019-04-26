@@ -62,9 +62,9 @@ adduct_matches <-
   select(mz,
          importance,
          adduct) %>%
-  mutate(mz_neutral = as.numeric(str_sub(adduct, str_length(adduct)-6, -1))) %>%
-  mutate(adduct = str_sub(adduct, 1, str_length(adduct)-8)) %>%
-  filter(!is.na(mz_neutral))
+  mutate(mz_neutral = str_match_all(adduct, "[:digit:]+\\.[:digit:]+")) %>% 
+  unnest(mz_neutral) %>%
+  mutate(mz_neutral = as.numeric(mz_neutral))
 
 # add variables for 50ppm error
 adduct_matches <-
@@ -135,9 +135,9 @@ adduct_matches <-
   select(mz,
          importance,
          adduct) %>%
-  mutate(mz_neutral = as.numeric(str_sub(adduct, str_length(adduct)-6, -1))) %>%
-  mutate(adduct = str_sub(adduct, 1, str_length(adduct)-8)) %>%
-  filter(!is.na(mz_neutral))
+  mutate(mz_neutral = str_match_all(adduct, "[:digit:]+\\.[:digit:]+")) %>% 
+  unnest(mz_neutral) %>%
+  mutate(mz_neutral = as.numeric(mz_neutral))
 
 # add variables for 50ppm error
 adduct_matches <-
@@ -208,9 +208,9 @@ adduct_matches <-
   select(mz,
          importance,
          adduct) %>%
-  mutate(mz_neutral = as.numeric(str_sub(adduct, str_length(adduct)-6, -1))) %>%
-  mutate(adduct = str_sub(adduct, 1, str_length(adduct)-8)) %>%
-  filter(!is.na(mz_neutral))
+  mutate(mz_neutral = str_match_all(adduct, "[:digit:]+\\.[:digit:]+")) %>% 
+  unnest(mz_neutral) %>%
+  mutate(mz_neutral = as.numeric(mz_neutral))
 
 # add variables for 50ppm error
 adduct_matches <-
@@ -281,9 +281,9 @@ adduct_matches <-
   select(mz,
          importance,
          adduct) %>%
-  mutate(mz_neutral = as.numeric(str_sub(adduct, str_length(adduct)-6, -1))) %>%
-  mutate(adduct = str_sub(adduct, 1, str_length(adduct)-8)) %>%
-  filter(!is.na(mz_neutral))
+  mutate(mz_neutral = str_match_all(adduct, "[:digit:]+\\.[:digit:]+")) %>% 
+  unnest(mz_neutral) %>%
+  mutate(mz_neutral = as.numeric(mz_neutral))
 
 # add variables for 50ppm error
 adduct_matches <-
@@ -354,9 +354,9 @@ adduct_matches <-
   select(mz,
          importance,
          adduct) %>%
-  mutate(mz_neutral = as.numeric(str_sub(adduct, str_length(adduct)-6, -1))) %>%
-  mutate(adduct = str_sub(adduct, 1, str_length(adduct)-8)) %>%
-  filter(!is.na(mz_neutral))
+  mutate(mz_neutral = str_match_all(adduct, "[:digit:]+\\.[:digit:]+")) %>% 
+  unnest(mz_neutral) %>%
+  mutate(mz_neutral = as.numeric(mz_neutral))
 
 # add variables for 50ppm error
 adduct_matches <-
