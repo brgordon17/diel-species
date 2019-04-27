@@ -53,7 +53,7 @@ matches <-
          -importance) %>%
   select(sample, everything())
 
-# identify adducts from impvars
+# identify adducts from impvars (e.g. [2M+H]+, [M+Na]+)
 adduct_matches <- 
   impvars %>%
   mutate(dummy = TRUE) %>%
