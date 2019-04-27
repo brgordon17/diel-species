@@ -55,3 +55,6 @@ matches <-
 
 # Save csv 
 readr::write_csv(matches, "./tables/annotated_diurnal_features.txt")
+
+# NOTE: Fragment ions must be removed after pasting into word.
+
