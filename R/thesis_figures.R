@@ -1139,7 +1139,7 @@ gridExtra::grid.arrange(plot_aspe,
                         bottom = xgrob)
 grDevices::dev.off()
 
-# plot of importnat diurnal feature intensities --------------------------------
+# plot of important diurnal feature intensities --------------------------------
 library(tidyverse)
 library(caret)
 
@@ -1188,6 +1188,7 @@ ggplot(sum_mzdata, aes(x = time_fac,
                 show.legend = FALSE) +
   geom_path(size = 0.8, show.legend = FALSE) +
   geom_point(size = 3) +
+  geom_hline(yintercept = 0.1, linetype = 3) +
   facet_wrap(vars(variable), labeller = as_labeller(names), scales = "free") +
   scale_x_discrete(name = "Time (hh:mm)") +
   scale_y_continuous(name = Mean~Intensity%*%10^4) +
@@ -1206,8 +1207,4 @@ ggplot(sum_mzdata, aes(x = time_fac,
         strip.background = element_blank()
   )
 
-ggsave("./figs/diurnal_intensities.pdf",
-       dpi = 600,
-       width = 10,
-       height = 7,
-       units = "in")
+ggsave("./figs/diurnal_intensities.pdf")
