@@ -1169,12 +1169,12 @@ sum_mzdata$variable <- as.factor(str_replace_all(sum_mzdata$variable, "mz_", "")
 
 # named vector and scaling values
 names <- c(
-  "784.53491" = "m/z 784.53491",
-  "277.18008" = "m/z 277.18008",
-  "1019.77533" = "m/z 1019.77533",
-  "347.25863" = "m/z 347.25863",
-  "815.55253" = "m/z 815.55253",
-  "135.04778" = "m/z 135.04778")
+  "784.53491" = "arachidonolthio PC",
+  "277.18008" = "methyl montiporate B",
+  "1019.77533" = "lyso-PAF C18",
+  "347.25863" = "10-hydroxydocosa-\npentaenoic acid",
+  "815.55253" = "pyrophaeophytin-a",
+  "135.04778" = "dimethylsulfonio-\npropionate")
 
 # create plot
 ggplot(sum_mzdata, aes(x = time_fac,
@@ -1201,9 +1201,9 @@ ggplot(sum_mzdata, aes(x = time_fac,
         axis.title = element_text(size = 16),
         axis.ticks = element_blank(),
         legend.key = element_blank(),
-        legend.text = element_text(size = 16),
+        legend.text = element_text(size = 14),
         legend.title = element_blank(),
-        strip.text = element_text(size = 16),
+        strip.text = element_text(size = 14),
         strip.background = element_blank()
   )
 
