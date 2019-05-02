@@ -1,12 +1,60 @@
-# Script to cross reference important diurnal features with the coral
-# research literature.
+# Script to cross reference important features with the coral  research 
+# literature.
 # Author: Benjamin R. Gordon
 # Date: 2019-04-26
 
+# Taxonomic features -----------------------------------------------------------
 library(tidyverse)
 library(caret)
 
-# Load data --------------------------------------------------------------------
+# Load data
+mzrf_taxon <- read_rds("./dev/mzrf_taxon.rds")
+load("./data/litmz.rda")
+
+mzdata_raw  <-  readr::read_csv("./data-raw/mzdata-raw.csv", na = "0")
+colnames(mzdata_raw)[1] <- "mz_raw"
+
+# Crossref taxon features ------------------------------------------------------
+# retrieve impvars
+impvars <- varImp(mzrf_taxon, scale = FALSE)
+impvars <- impvars$importance
+impvars <- 
+  bind_cols(mz = as.numeric(str_replace(rownames(impvars), "mz_", "")),
+            importance = apply(impvars, 1, max))
+impvars <- impvars[order(-impvars$importance), ,drop = FALSE]
+impvars <- impvars[1:20, ]
+
+# Add variables for 50 ppm error ranges 
+ppm <- 50
+matches <-
+  impvars %>%
+  rowwise() %>%
+  mutate(adduct = "none",
+         mz_neutral = mz - 1.007276,
+         mz_low = mz_neutral - (mz * ppm/10^6),
+         mz_high = mz_neutral + (mz * ppm/10^6)) %>%
+  ungroup()
+
+# Cross reference with litmz
+matches <-
+  matches %>%
+  mutate(dummy = TRUE) %>%
+  left_join(litmz %>% mutate(dummy = TRUE))  %>%
+  filter(monoiso_mass <= mz_high, monoiso_mass >= mz_low) %>%
+  select(-dummy,
+         -mz_neutral,
+         -mz_low,
+         -mz_high,
+         -importance)
+
+# NOTE ----
+# No features matched with litmz
+
+# Diurnal features -------------------------------------------------------------
+library(tidyverse)
+library(caret)
+
+# Load data
 mzrf_aspe <- read_rds("./dev/mzrf_aspe.rds")
 mzrf_aequ <- read_rds("./dev/mzrf_aequ.rds")
 mzrf_digi <- read_rds("./dev/mzrf_digi.rds")
