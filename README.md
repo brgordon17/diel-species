@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Diel Variation of Five Scleractinian Coral and their Collection in the Field
+# Diel Variation of Five Scleractinian Corals and their Collection in the Field
 
 <!-- badges: start -->
 

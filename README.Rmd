@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
-# Diel Variation of Five Scleractinian Coral and their Collection in the Field
+# Diel Variation of Five Scleractinian Corals and their Collection in the Field
 
 <!-- badges: start -->
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
