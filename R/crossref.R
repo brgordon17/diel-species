@@ -1,5 +1,5 @@
 # Script to cross reference important features with the coral  research 
-# literature.
+# literature in the coralmz package.
 # Author: Benjamin R. Gordon
 # Date: 2019-04-26
 
@@ -9,12 +9,11 @@ library(caret)
 
 # Load data
 mzrf_taxon <- read_rds("./dev/mzrf_taxon.rds")
-load("./data/litmz.rda")
-
+coralmz <- coralmz::coralmz
 mzdata_raw  <-  readr::read_csv("./data-raw/mzdata-raw.csv", na = "0")
 colnames(mzdata_raw)[1] <- "mz_raw"
 
-# Crossref taxon features ------------------------------------------------------
+# Crossref taxon features
 # retrieve impvars
 impvars <- varImp(mzrf_taxon, scale = FALSE)
 impvars <- impvars$importance
@@ -35,11 +34,11 @@ matches <-
          mz_high = mz_neutral + (mz * ppm/10^6)) %>%
   ungroup()
 
-# Cross reference with litmz
+# Cross reference with coralmz
 matches <-
   matches %>%
   mutate(dummy = TRUE) %>%
-  left_join(litmz %>% mutate(dummy = TRUE))  %>%
+  left_join(coralmz %>% mutate(dummy = TRUE))  %>%
   filter(monoiso_mass <= mz_high, monoiso_mass >= mz_low) %>%
   select(-dummy,
          -mz_neutral,
@@ -48,7 +47,7 @@ matches <-
          -importance)
 
 # NOTE ----
-# No features matched with litmz
+# No features matched with coralmz
 
 # Diurnal features -------------------------------------------------------------
 library(tidyverse)
@@ -61,12 +60,12 @@ mzrf_digi <- read_rds("./dev/mzrf_digi.rds")
 mzrf_cyli <- read_rds("./dev/mzrf_cyli.rds")
 mzrf_dami <- read_rds("./dev/mzrf_dami.rds")
 
-load("./data/litmz.rda")
+coralmz <- coralmz::coralmz
 
 mzdata_raw  <-  readr::read_csv("./data-raw/mzdata-raw.csv", na = "0")
 colnames(mzdata_raw)[1] <- "mz_raw"
 
-# Crossref A. aspera -----------------------------------------------------------
+# Crossref A. aspera
 # retrieve impvars
 impvars <- varImp(mzrf_aspe, scale = FALSE)
 impvars <- impvars$importance
@@ -87,11 +86,11 @@ matches <-
          mz_high = mz_neutral + (mz * ppm/10^6)) %>%
   ungroup()
 
-# Cross reference with litmz
+# Cross reference with coralmz
 matches <-
   matches %>%
   mutate(dummy = TRUE) %>%
-  left_join(litmz %>% mutate(dummy = TRUE))  %>%
+  left_join(coralmz %>% mutate(dummy = TRUE))  %>%
   filter(monoiso_mass <= mz_high, monoiso_mass >= mz_low) %>%
   mutate(sample = "A_aspe") %>%
   select(-dummy,
@@ -122,11 +121,11 @@ adduct_matches <-
          mz_high = mz_neutral + (mz_neutral * ppm/10^6)) %>%
   ungroup()
 
-# Cross reference adducts with litmz
+# Cross reference adducts with coralmz
 adduct_matches <-
   adduct_matches %>%
   mutate(dummy = TRUE) %>%
-  left_join(litmz %>% mutate(dummy = TRUE))  %>%
+  left_join(coralmz %>% mutate(dummy = TRUE))  %>%
   filter(monoiso_mass <= mz_high, monoiso_mass >= mz_low) %>%
   mutate(sample = "A_aspe") %>%
   select(-dummy,
@@ -139,7 +138,7 @@ adduct_matches <-
 # Join
 aspe_matches <- bind_rows(matches, adduct_matches)
 
-# Crossref M_aequ --------------------------------------------------------------
+# Crossref M_aequ
 # retrieve impvars
 impvars <- varImp(mzrf_aequ, scale = FALSE)
 impvars <- impvars$importance
@@ -160,11 +159,11 @@ matches <-
          mz_high = mz_neutral + (mz * ppm/10^6)) %>%
   ungroup()
 
-# Cross reference with litmz
+# Cross reference with coralmz
 matches <-
   matches %>%
   mutate(dummy = TRUE) %>%
-  left_join(litmz %>% mutate(dummy = TRUE))  %>%
+  left_join(coralmz %>% mutate(dummy = TRUE))  %>%
   filter(monoiso_mass <= mz_high, monoiso_mass >= mz_low) %>%
   mutate(sample = "M_aequ") %>%
   select(-dummy,
@@ -195,11 +194,11 @@ adduct_matches <-
          mz_high = mz_neutral + (mz_neutral * ppm/10^6)) %>%
   ungroup()
 
-# Cross reference adducts with litmz
+# Cross reference adducts with coralmz
 adduct_matches <-
   adduct_matches %>%
   mutate(dummy = TRUE) %>%
-  left_join(litmz %>% mutate(dummy = TRUE))  %>%
+  left_join(coralmz %>% mutate(dummy = TRUE))  %>%
   filter(monoiso_mass <= mz_high, monoiso_mass >= mz_low) %>%
   mutate(sample = "M_aequ") %>%
   select(-dummy,
@@ -233,11 +232,11 @@ matches <-
          mz_high = mz_neutral + (mz * ppm/10^6)) %>%
   ungroup()
 
-# Cross reference with litmz
+# Cross reference with coralmz
 matches <-
   matches %>%
   mutate(dummy = TRUE) %>%
-  left_join(litmz %>% mutate(dummy = TRUE))  %>%
+  left_join(coralmz %>% mutate(dummy = TRUE))  %>%
   filter(monoiso_mass <= mz_high, monoiso_mass >= mz_low) %>%
   mutate(sample = "M_digi") %>%
   select(-dummy,
@@ -268,11 +267,11 @@ adduct_matches <-
          mz_high = mz_neutral + (mz_neutral * ppm/10^6)) %>%
   ungroup()
 
-# Cross reference adducts with litmz
+# Cross reference adducts with coralmz
 adduct_matches <-
   adduct_matches %>%
   mutate(dummy = TRUE) %>%
-  left_join(litmz %>% mutate(dummy = TRUE))  %>%
+  left_join(coralmz %>% mutate(dummy = TRUE))  %>%
   filter(monoiso_mass <= mz_high, monoiso_mass >= mz_low) %>%
   mutate(sample = "M_digi") %>%
   select(-dummy,
@@ -285,7 +284,7 @@ adduct_matches <-
 # Join
 digi_matches <- bind_rows(matches, adduct_matches)
 
-# Crossref M_cyli --------------------------------------------------------------
+# Crossref M_cyli
 # retrieve impvars
 impvars <- varImp(mzrf_cyli, scale = FALSE)
 impvars <- impvars$importance
@@ -306,11 +305,11 @@ matches <-
          mz_high = mz_neutral + (mz * ppm/10^6)) %>%
   ungroup()
 
-# Cross reference with litmz
+# Cross reference with coralmz
 matches <-
   matches %>%
   mutate(dummy = TRUE) %>%
-  left_join(litmz %>% mutate(dummy = TRUE))  %>%
+  left_join(coralmz %>% mutate(dummy = TRUE))  %>%
   filter(monoiso_mass <= mz_high, monoiso_mass >= mz_low) %>%
   mutate(sample = "P_cyli") %>%
   select(-dummy,
@@ -341,11 +340,11 @@ adduct_matches <-
          mz_high = mz_neutral + (mz_neutral * ppm/10^6)) %>%
   ungroup()
 
-# Cross reference adducts with litmz
+# Cross reference adducts with coralmz
 adduct_matches <-
   adduct_matches %>%
   mutate(dummy = TRUE) %>%
-  left_join(litmz %>% mutate(dummy = TRUE))  %>%
+  left_join(coralmz %>% mutate(dummy = TRUE))  %>%
   filter(monoiso_mass <= mz_high, monoiso_mass >= mz_low) %>%
   mutate(sample = "P_cyli") %>%
   select(-dummy,
@@ -358,7 +357,7 @@ adduct_matches <-
 # Join
 cyli_matches <- bind_rows(matches, adduct_matches)
 
-# Crossref P_dami --------------------------------------------------------------
+# Crossref P_dami
 # retrieve impvars
 impvars <- varImp(mzrf_dami, scale = FALSE)
 impvars <- impvars$importance
@@ -379,11 +378,11 @@ matches <-
          mz_high = mz_neutral + (mz * ppm/10^6)) %>%
   ungroup()
 
-# Cross reference with litmz
+# Cross reference with coralmz
 matches <-
   matches %>%
   mutate(dummy = TRUE) %>%
-  left_join(litmz %>% mutate(dummy = TRUE))  %>%
+  left_join(coralmz %>% mutate(dummy = TRUE))  %>%
   filter(monoiso_mass <= mz_high, monoiso_mass >= mz_low) %>%
   mutate(sample = "P_dami") %>%
   select(-dummy,
@@ -414,11 +413,11 @@ adduct_matches <-
          mz_high = mz_neutral + (mz_neutral * ppm/10^6)) %>%
   ungroup()
 
-# Cross reference adducts with litmz
+# Cross reference adducts with coralmz
 adduct_matches <-
   adduct_matches %>%
   mutate(dummy = TRUE) %>%
-  left_join(litmz %>% mutate(dummy = TRUE))  %>%
+  left_join(coralmz %>% mutate(dummy = TRUE))  %>%
   filter(monoiso_mass <= mz_high, monoiso_mass >= mz_low) %>%
   mutate(sample = "P_dami") %>%
   select(-dummy,
