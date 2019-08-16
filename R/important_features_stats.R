@@ -97,3 +97,7 @@ formula <-
   as.formula(paste0("cbind(", paste(names(features_dami)[5:ncol(features_dami)], 
                                     collapse = ","), ") ~ time_fac"))
 summary(aov(formula, data = features_dami))
+
+# Kruskal wallis tests ---------------------------------------------------------
+apply(features_cyli[5:ncol(features_cyli)], 2, kruskal.test, 
+      g = features_cyli$time_fac)
