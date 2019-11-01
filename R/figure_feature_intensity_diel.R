@@ -30,7 +30,7 @@ sum_mzdata$variable <- as.factor(str_replace_all(sum_mzdata$variable, "mz_", "")
 
 # named vector and scaling values
 names <- c(
-  "784.53491" = "arachidonolthio PC",
+  "784.53491" = "arachidonolthio-PC",
   "277.18008" = "methyl montiporate B",
   "1019.77533" = "lyso-PAF C18",
   "347.25863" = "10-hydroxydocosa-\npentaenoic acid",
