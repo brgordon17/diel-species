@@ -12,7 +12,7 @@ mzrf_digi <- read_rds("./dev/mzrf_digi.rds")
 mzrf_cyli <- read_rds("./dev/mzrf_cyli.rds")
 mzrf_dami <- read_rds("./dev/mzrf_dami.rds")
 
-# Identify important variables
+# Identify important variables -------------------------------------------------
 # for aspe
 aspe_impvars <- varImp(mzrf_aspe, scale = FALSE)
 aspe_impvars <- aspe_impvars$importance
@@ -83,7 +83,7 @@ dami_impvars$mz <- round(as.numeric(dami_impvars$mz), 4)
 dami_impvars$mz <- factor(dami_impvars$mz, levels = rev(dami_impvars$mz))
 dami_impvars <- select(dami_impvars, mz, everything())
 
-# plotting
+# plotting ---------------------------------------------------------------------
 aspe_plot <- ggplot(aspe_impvars, 
                     aes(x = importance, 
                         y = mz,
@@ -91,7 +91,7 @@ aspe_plot <- ggplot(aspe_impvars,
                         colour = max_class,
                         fill = max_class)) +
   geom_point(size = 3, stroke = 1) +
-  scale_x_continuous(name = NULL) +
+  scale_x_continuous(name = NULL, limits = c(1.3, 2.0)) +
   scale_y_discrete(name = NULL) +
   scale_color_manual(name = "Time (hh:mm)",
                      values = grDevices::adjustcolor(phdhelpr::qual_colours[c(1:3, 6, 7)],
@@ -103,12 +103,12 @@ aspe_plot <- ggplot(aspe_impvars,
                      values = c(21:24)) +
   theme(axis.ticks.y = element_blank(),
         axis.ticks.x = element_blank(),
-        axis.text.x = element_text(size = 10),
-        axis.text.y = element_text(size = 10),
+        axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 12),
         panel.grid.minor.x = element_blank(),
         panel.grid.major.x = element_blank(),
-        legend.title = element_text(size = 12),
-        legend.text = element_text(size = 12),
+        legend.title = element_text(size = 14),
+        legend.text = element_text(size = 14),
         legend.key = element_blank())
 aspe_plot
 
@@ -119,7 +119,7 @@ aequ_plot <- ggplot(aequ_impvars,
                         colour = max_class,
                         fill = max_class)) +
   geom_point(size = 3, stroke = 1) +
-  scale_x_continuous(name = NULL) +
+  scale_x_continuous(name = NULL, limits = c(1.3, 2.0)) +
   scale_y_discrete(name = NULL) +
   scale_color_manual(name = "Time (hh:mm)",
                      values = grDevices::adjustcolor(phdhelpr::qual_colours[c(1:3, 6, 7)],
@@ -131,8 +131,8 @@ aequ_plot <- ggplot(aequ_impvars,
                      values = c(21:24)) +
   theme(axis.ticks.y = element_blank(),
         axis.ticks.x = element_blank(),
-        axis.text.x = element_text(size = 10),
-        axis.text.y = element_text(size = 10),
+        axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 12),
         panel.grid.minor.x = element_blank(),
         panel.grid.major.x = element_blank(),
         legend.position = "none")
@@ -145,7 +145,7 @@ digi_plot <- ggplot(digi_impvars,
                         colour = max_class,
                         fill = max_class)) +
   geom_point(size = 3, stroke = 1) +
-  scale_x_continuous(name = NULL) +
+  scale_x_continuous(name = NULL, limits = c(1.3, 2.0)) +
   scale_y_discrete(name = NULL) +
   scale_color_manual(name = "Time (hh:mm)",
                      values = grDevices::adjustcolor(phdhelpr::qual_colours[c(1:3, 6, 7)],
@@ -157,8 +157,8 @@ digi_plot <- ggplot(digi_impvars,
                      values = c(21:24)) +
   theme(axis.ticks.y = element_blank(),
         axis.ticks.x = element_blank(),
-        axis.text.x = element_text(size = 10),
-        axis.text.y = element_text(size = 10),
+        axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 12),
         panel.grid.minor.x = element_blank(),
         panel.grid.major.x = element_blank(),
         legend.position = "none")
@@ -171,7 +171,7 @@ cyli_plot <- ggplot(cyli_impvars,
                         colour = max_class,
                         fill = max_class)) +
   geom_point(size = 3, stroke = 1) +
-  scale_x_continuous(name = NULL) +
+  scale_x_continuous(name = NULL, limits = c(1.3, 2.0)) +
   scale_y_discrete(name = NULL) +
   scale_color_manual(name = "Time (hh:mm)",
                      values = grDevices::adjustcolor(phdhelpr::qual_colours[c(1:3, 6, 7)],
@@ -183,8 +183,8 @@ cyli_plot <- ggplot(cyli_impvars,
                      values = c(21:24)) +
   theme(axis.ticks.y = element_blank(),
         axis.ticks.x = element_blank(),
-        axis.text.x = element_text(size = 10),
-        axis.text.y = element_text(size = 10),
+        axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 12),
         panel.grid.minor.x = element_blank(),
         panel.grid.major.x = element_blank(),
         legend.position = "none")
@@ -197,7 +197,7 @@ dami_plot <- ggplot(dami_impvars,
                         colour = max_class,
                         fill = max_class)) +
   geom_point(size = 3, stroke = 1) +
-  scale_x_continuous(name = NULL) +
+  scale_x_continuous(name = NULL, limits = c(1.3, 2.0)) +
   scale_y_discrete(name = NULL) +
   scale_color_manual(name = "Time (hh:mm)",
                      values = grDevices::adjustcolor(phdhelpr::qual_colours[c(1:3, 6, 7)],
@@ -209,8 +209,8 @@ dami_plot <- ggplot(dami_impvars,
                      values = c(21:24)) +
   theme(axis.ticks.y = element_blank(),
         axis.ticks.x = element_blank(),
-        axis.text.x = element_text(size = 10),
-        axis.text.y = element_text(size = 10),
+        axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 12),
         panel.grid.minor.x = element_blank(),
         panel.grid.major.x = element_blank(),
         legend.position = "none")
@@ -230,21 +230,21 @@ plot_aspe <-
                          top = grid::textGrob("A. aspera",
                                               x = grid::unit(0.5, "npc"),
                                               y = grid::unit(0.5, "npc"),
-                                              gp = grid::gpar(fontsize = 12)
+                                              gp = grid::gpar(fontsize = 14)
                          ))
 plot_aequ <-
   gridExtra::arrangeGrob(aequ_plot,
                          top = grid::textGrob("M. aequituberculata",
                                               x = grid::unit(0.5, "npc"),
                                               y = grid::unit(0.5, "npc"),
-                                              gp = grid::gpar(fontsize = 12)
+                                              gp = grid::gpar(fontsize = 14)
                          ))
 plot_digi <-
   gridExtra::arrangeGrob(digi_plot,
                          top = grid::textGrob("M. digitata",
                                               x = grid::unit(0.5, "npc"),
                                               y = grid::unit(0.5, "npc"),
-                                              gp = grid::gpar(fontsize = 12)
+                                              gp = grid::gpar(fontsize = 14)
                          ))
 
 plot_cyli <-
@@ -252,7 +252,7 @@ plot_cyli <-
                          top = grid::textGrob("P. cylindrica",
                                               x = grid::unit(0.5, "npc"),
                                               y = grid::unit(0.5, "npc"),
-                                              gp = grid::gpar(fontsize = 12)
+                                              gp = grid::gpar(fontsize = 14)
                          ))
 
 plot_dami <-
@@ -260,7 +260,7 @@ plot_dami <-
                          top = grid::textGrob("P. damicornis",
                                               x = grid::unit(0.5, "npc"),
                                               y = grid::unit(0.5, "npc"),
-                                              gp = grid::gpar(fontsize = 12)
+                                              gp = grid::gpar(fontsize = 14)
                          ))
 
 # create x- and y-axis text grobs
@@ -268,7 +268,7 @@ xgrob <- grid::textGrob("Mean Decrease in Accuracy",
                         x = grid::unit(0.5, "npc"),
                         y = grid::unit(0.5, "npc"),
                         just = c("centre"),
-                        gp = grid::gpar(fontsize = 12)
+                        gp = grid::gpar(fontsize = 14)
 )
 
 ygrob <- grid::textGrob("Important Spectral Features (Da)",
@@ -276,7 +276,7 @@ ygrob <- grid::textGrob("Important Spectral Features (Da)",
                         y = grid::unit(0.5, "npc"),
                         just = c("centre"),
                         rot = 90,
-                        gp = grid::gpar(fontsize = 12)
+                        gp = grid::gpar(fontsize = 14)
 )
 
 gridExtra::grid.arrange(plot_aspe,
