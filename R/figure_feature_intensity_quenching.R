@@ -3,6 +3,7 @@
 # Date: 2019-04-12
 
 library(tidyverse)
+library(caret)
 
 # Load data
 load("./data/snapdata.rda")
@@ -37,11 +38,11 @@ ggplot(sum_snapdata, aes(x = class,
   scale_colour_manual(values = phdhelpr::qual_colours[c(6, 2)]) +
   theme(axis.text.y = element_text(size = 10, colour = "grey65"),
         axis.text.x = element_blank(),
-        axis.title = element_text(size = 12),
+        axis.title = element_text(size = 14),
         axis.ticks = element_blank(),
         legend.key = element_blank(),
-        legend.text = element_text(size = 12),
-        strip.text = element_text(size = 12),
+        legend.text = element_text(size = 14),
+        strip.text = element_text(size = 14),
         strip.background = element_blank(),
         legend.position = "bottom",
         legend.title = element_blank()
