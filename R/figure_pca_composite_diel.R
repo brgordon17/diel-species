@@ -63,8 +63,8 @@ aspe_plot <- ggplot(data = aspe_scores,
   theme(axis.ticks = element_blank(),panel.grid.major = element_line(colour = "grey90"),
         axis.text = element_text(size = 10, colour = "grey65"),
         axis.title = element_blank(),
-        legend.text = element_text(size = 11),
-        legend.title = element_text(size = 12),
+        legend.text = element_text(size = 14),
+        legend.title = element_text(size = 14),
         legend.position = "right")
 
 aequ_plot <- ggplot(data = aequ_scores,
@@ -157,21 +157,21 @@ plot_aspe <-
                          top = grid::textGrob("A. aspera",
                                               x = grid::unit(0.5, "npc"),
                                               y = grid::unit(0.5, "npc"),
-                                              gp = grid::gpar(fontsize = 12)
+                                              gp = grid::gpar(fontsize = 14)
                          ))
 plot_aequ <-
   gridExtra::arrangeGrob(aequ_plot,
                          top = grid::textGrob("M. aequituberculata",
                                               x = grid::unit(0.5, "npc"),
                                               y = grid::unit(0.5, "npc"),
-                                              gp = grid::gpar(fontsize = 12)
+                                              gp = grid::gpar(fontsize = 14)
                          ))
 plot_digi <-
   gridExtra::arrangeGrob(digi_plot,
                          top = grid::textGrob("M. digitata",
                                               x = grid::unit(0.5, "npc"),
                                               y = grid::unit(0.5, "npc"),
-                                              gp = grid::gpar(fontsize = 12)
+                                              gp = grid::gpar(fontsize = 14)
                          ))
 
 plot_cyli <-
@@ -179,7 +179,7 @@ plot_cyli <-
                          top = grid::textGrob("P. cylindrica",
                                               x = grid::unit(0.5, "npc"),
                                               y = grid::unit(0.5, "npc"),
-                                              gp = grid::gpar(fontsize = 12)
+                                              gp = grid::gpar(fontsize = 14)
                          ))
 
 plot_dami <-
@@ -187,7 +187,7 @@ plot_dami <-
                          top = grid::textGrob("P. damicornis",
                                               x = grid::unit(0.5, "npc"),
                                               y = grid::unit(0.5, "npc"),
-                                              gp = grid::gpar(fontsize = 12)
+                                              gp = grid::gpar(fontsize = 14)
                          ))
 
 # create x- and y-axis text grobs
@@ -195,7 +195,7 @@ xgrob <- grid::textGrob(expression(PC1%*%10^4),
                         x = grid::unit(0.5, "npc"),
                         y = grid::unit(0.5, "npc"),
                         just = c("centre"),
-                        gp = grid::gpar(fontsize = 12)
+                        gp = grid::gpar(fontsize = 14)
 )
 
 ygrob <- grid::textGrob(expression(PC2%*%10^4),
@@ -203,7 +203,7 @@ ygrob <- grid::textGrob(expression(PC2%*%10^4),
                         y = grid::unit(0.5, "npc"),
                         just = c("centre"),
                         rot = 90,
-                        gp = grid::gpar(fontsize = 12)
+                        gp = grid::gpar(fontsize = 14)
 )
 
 gridExtra::grid.arrange(plot_aspe,
