@@ -1,0 +1,23 @@
+{
+    "description": "<p>A repository for the data and analysis used in B. Gordon's thesis, Chapter 6</p>", 
+    "license": "MIT", 
+    "title": "Revealing Taxonomic and Diel Variation Through Untargeted Metabolomics", 
+    "upload_type": "dataset", 
+    "keywords": [
+        "coral",
+        "metabolomics",
+        "mass spectrometry",
+        "R"
+    ], 
+    "creators": [
+        {
+            "name": "Gordon, Benjamin R.",
+            "orcid": "0000-0002-2979-1964"
+        },
+        {
+            "name": "Motti, Cherie A.",
+            "orcid": "0000-0002-3292-2785"
+        }
+    ], 
+    "access_right": "open" 
+}
